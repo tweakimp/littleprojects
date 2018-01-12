@@ -1,0 +1,23 @@
+body {
+    background-color: #982439;
+}
+
+#table {
+    padding: 10px;
+}
+
+canvas {
+	position: absolute;
+}
+
+#help {
+	font-family: monospace;
+	color: #ffffff;
+	text-transform: uppercase;
+	border: 2px dotted;
+	padding: 5px;
+	display: inline-block;
+}
+p{
+	margin: 0px;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>SPINCULT</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div id="help">
+		<p>Click on the + to create a new table.</p>
+		<p>Click and drag with the left mouse button to draw an arrow.</p>
+		<p>Right click on an arrow to remove it.</p>
+		<p>Click on the X button to remove a table.</p>
+		<br/>
+		<p><button type="button" onclick="closeHelp()">Close help</button></p>
+	</div>
+	<div id="tables">
+	</div>
+
+
+</body>
+<script src="mouse.js"></script>
+<script src="helpfunctions.js"></script>
+<script src="main.js"></script>
+<script>
+	function closeHelp() {
+		document.getElementById("help").style.display = "none";
+	}
+
+</script>
+
+</html>

@@ -1,0 +1,17 @@
+html {
+  background-color: #1d1f21;
+}
+
+.container {
+  text-align: center;
+}
+
+.textbox {
+  text-align: center;
+  color: white;
+  font-family: monospace;
+}
+
+canvas {
+  display: inline-block;
+}
