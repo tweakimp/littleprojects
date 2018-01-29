@@ -48,7 +48,20 @@
     samelistwithoutduplicates = list(dict.fromkeys(listwithduplicates))
     samelistwithoutduplicates   # [1, 2, 3, 5, 8, 89, 9, 64]
   ```
-
+  
+- Stopwatch decorator:
+  ```python
+  from datetime import datetime
+  def stopwatch(f):
+    def wrap(*args, **kw):
+      start = datetime.now()
+      result = f(*args, **kw)
+      end = datetime.now()
+      print(end - start)
+      return result
+    return wrap
+    ```
+    
 ## Pip:
 
 - List all packages
