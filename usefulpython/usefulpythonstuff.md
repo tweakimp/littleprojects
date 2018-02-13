@@ -62,6 +62,12 @@
     return wrap
     ```
     
+- Function profiler:
+  ```python
+  import cProfile
+  cProfile.run("function()")
+  ```
+    
 ## Pip:
 
 - List all packages
