@@ -67,6 +67,18 @@
   import cProfile
   cProfile.run("function()")
   ```
+  
+- Save data to hard drive:
+  ```python
+  import pickle
+  a = [1,2,3,4,5]
+  with open('filename.pickle', 'wb') as handle:
+      pickle.dump(a, handle, protocol=pickle.HIGHEST_PROTOCOL)  
+  with open('filename.pickle', 'rb') as handle:
+      b = pickle.load(handle)
+  
+  print a == b #True
+  ```
     
 ## Pip:
 
