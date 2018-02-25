@@ -1,0 +1,35 @@
+import math
+
+
+def bremsweg(v, a=8):
+    v /= 3.6  # convert to m/s
+    s = (v ** 2) / (2 * a)
+    return round(s, 2)
+
+
+def unterschied(v1, v2):
+    return round(bremsweg(v1) - bremsweg(v2), 2)
+
+
+# print(unterschied(70, 50))
+# print(unterschied(120, 100))
+# print(bremsweg(50))
+
+
+def Ekin(v, m=1100):
+    v /= 3.6  # convert to m/s
+    return round(0.5 * 1100 * v * v, 2)
+
+# print(Ekin(70))
+
+
+def geschwindigkeitBrems(v, s=48, a=8):
+    v /= 3.6  # convert to m/s
+    x = v**2 - 2 * a * s
+    x = x if x > 0 else 0
+    current = sqrt(x)
+    current *= 3.6
+    return round(current, 2)
+
+
+# print(geschwindigkeitBrems(70, s=12))
