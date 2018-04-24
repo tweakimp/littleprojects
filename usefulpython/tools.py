@@ -9,23 +9,62 @@ from timeit import default_timer
 import numpy as np
 
 
+def printmatrix(matrix):
+    """Prints a matrix with leading spaces."""
+    lengths = [[(len(str(y))) for y in x] for x in transpose(matrix)]
+    longest = [max(x) for x in lengths]
+    # print(longest)
+    for line in matrix:
+        for n, entry in enumerate(line):
+            # print("\nlongeest", longest[n])
+            print(f" " * (longest[n] - len(str(entry))
+                          ) + f"{str(entry)}", end=" ")
+        print()
+
+
+def printlist(lst, columns, padding, separator):
+    """Prints a list columnwise."""
+    # UNDER CONSTRUCTION
+    missingentries = columns - len(alist) % columns
+    xlist = lst[:]  # copy list!
+    for i in range(missingentries):
+        xlist.append(":")
+    columnwidths = [0 for _ in range(columns)]
+    columnlength = len(xlist) // columns
+    for i in range(len(xlist)):
+        if columnwidths[i // columnlength] < len(xlist[i]) + padding:
+            columnwidths[i // columnlength] = len(xlist[i]) + padding
+    for i in range(len(xlist)):
+        xlist[i] = f"{xlist[i]: <{columnwidths[i // columnlength]}}"
+    columnlength = len(xlist) // columns
+    for i in range(columnlength):
+        for j in range(columns):
+            print(xlist[i + (j * columnlength)], end="")
+        print("")
+
+
 def rotateLeft(matrix):
+    """Rotate a matrix counterclockwise."""
     return (np.rot90(np.array(matrix))).tolist()
 
 
 def rotate180(matrix):
+    """Rotate a matrix 180 degrees."""
     return (np.rot90(np.array(matrix), k=2)).tolist()
 
 
 def rotateRight(matrix):
+    """Rotate a matrix clockwise."""
     return (np.rot90(np.array(matrix), k=3)).tolist()
 
 
 def flipVert(matrix):
+    """Flip a matrix vertically."""
     return (np.flip(np.array(matrix), 0)).tolist()
 
 
 def flipHori(matrix):
+    """Flip a matrix horizontally."""
     return (np.flip(np.array(matrix), 1)).tolist()
 
 
@@ -125,3 +164,6 @@ if __name__ == '__main__':
     tracetest(test=3)
     tracetest(test=3, notest="4")
     tracetest(1, "2", test=3, notest="4")
+    matrix = [[-1, 2, 3], [10, 3333, 3000], [10, -200, 3000]]
+    printmatrix(matrix)
+    print(transpose(matrix))
