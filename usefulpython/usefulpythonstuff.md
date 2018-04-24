@@ -89,7 +89,7 @@
 
 - Update all packages
   ```cli
-   pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+   pip freeze > requirements.txt && pip install --upgrade -r requirements.txt && rm requirements.txt
   ```
 ## Atom:
  
