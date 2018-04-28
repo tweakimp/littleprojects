@@ -22,25 +22,17 @@ def printmatrix(matrix):
         print()
 
 
-def printlist(lst, columns, padding, separator):
+def printlist(lst, columns):
     """Prints a list columnwise."""
-    # UNDER CONSTRUCTION
-    missingentries = columns - len(alist) % columns
+    missingentries = columns - len(lst) % columns
     xlist = lst[:]  # copy list!
     for i in range(missingentries):
-        xlist.append(":")
-    columnwidths = [0 for _ in range(columns)]
-    columnlength = len(xlist) // columns
-    for i in range(len(xlist)):
-        if columnwidths[i // columnlength] < len(xlist[i]) + padding:
-            columnwidths[i // columnlength] = len(xlist[i]) + padding
-    for i in range(len(xlist)):
-        xlist[i] = f"{xlist[i]: <{columnwidths[i // columnlength]}}"
-    columnlength = len(xlist) // columns
-    for i in range(columnlength):
-        for j in range(columns):
-            print(xlist[i + (j * columnlength)], end="")
-        print("")
+        xlist.append("" * missingentries)
+    matrix = [[
+        xlist[i + j * (len(xlist) // columns)]
+        for j in range(columns)] for i in range(len(xlist) // columns)]
+    print(missingentries)
+    printmatrix(matrix)
 
 
 def rotateLeft(matrix):
@@ -93,14 +85,28 @@ def profiler(func):
         result = profile.runcall(func, *args, **kwargs)
         profile.print_stats()
         return result
-
     return wrap
+
+
+def recursive_profiler(f):
+    is_evaluating = False
+
+    def g(x, y, row):
+        nonlocal is_evaluating
+        if is_evaluating:
+            return f(x, y, row)
+        else:
+            is_evaluating = True
+            profile = cProfile.Profile()
+            result = profile.runcall(f, x, y, row)
+            profile.print_stats()
+            return result
+    return g
 
 
 def stopwatch(func):
     """Print runtime of decorated function."""
     def wrap(*args, **kw):
-
         start = default_timer()
         result = func(*args, **kw)
         delta = timedelta(seconds=(default_timer() - start))
@@ -143,6 +149,7 @@ def tracer(func):
 
 if __name__ == '__main__':
     from time import sleep
+    import unittest
 
     @stopwatch
     def timetest():
@@ -164,6 +171,21 @@ if __name__ == '__main__':
     tracetest(test=3)
     tracetest(test=3, notest="4")
     tracetest(1, "2", test=3, notest="4")
+
     matrix = [[-1, 2, 3], [10, 3333, 3000], [10, -200, 3000]]
     printmatrix(matrix)
-    print(transpose(matrix))
+    printmatrix(transpose(matrix))
+
+    testlist = [x for x in range(1, 41)]
+    print(testlist)
+    printlist(testlist, 3)
+
+    class TestTools(unittest.TestCase):
+        def test_flatten(self):
+            self.assertEqual(
+                flatten([1, [2, 3, [], 4, [[[5]]]]]), [1, 2, 3, 4, 5])
+            self.assertEqual(flatten([]), [])
+            self.assertEqual(flatten([1]), [1])
+            self.assertEqual(flatten([[1], ["a", 2]]), [1, "a", 2])
+
+    unittest.main()
