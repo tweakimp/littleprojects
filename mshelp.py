@@ -32,9 +32,9 @@ def possibilities(numbers, dim, magicnumber):
 
 def remainding_possibilities(matrix, possibilities):
     '''Returns the remainding possibilities once the matrix has entries.'''
-    entries = [item for sublist in matrix for item in sublist if item != ""]
+    entries =  {item for sublist in matrix for item in sublist if item != ""}
     remainders = [x for x in possibilities
-                  if set(entries).isdisjoint(x)]
+                  if entries.isdisjoint(x)]
     return remainders
 
 
