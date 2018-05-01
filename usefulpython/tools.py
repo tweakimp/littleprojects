@@ -88,20 +88,21 @@ def profiler(func):
     return wrap
 
 
-def recursive_profiler(f):
+def recursive_profiler(func):
+    """Create a run call profile of the decorated recursive function."""
     is_evaluating = False
 
-    def g(x, y, row):
+    def wrap(*args, **kwargs):
         nonlocal is_evaluating
         if is_evaluating:
-            return f(x, y, row)
+            return func(*args, **kwargs)
         else:
             is_evaluating = True
             profile = cProfile.Profile()
-            result = profile.runcall(f, x, y, row)
+            result = profile.runcall(func, *args, **kwargs)
             profile.print_stats()
             return result
-    return g
+    return wrap
 
 
 def stopwatch(func):
