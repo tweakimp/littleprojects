@@ -79,7 +79,13 @@
   
   print a == b #True
   ```
-    
+  
+## git commands:
+- fix line endings from CRLF to LF
+  ````cli
+    find . -name "*.py" -exec dos2unix {} \;
+  ```
+
 ## Pip:
 
 - List all packages
