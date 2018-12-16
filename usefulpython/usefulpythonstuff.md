@@ -82,7 +82,7 @@
   
 ## git commands:
 - fix line endings from CRLF to LF
-  ````cli
+  ```cli
     find . -name "*.py" -exec dos2unix {} \;
   ```
 
